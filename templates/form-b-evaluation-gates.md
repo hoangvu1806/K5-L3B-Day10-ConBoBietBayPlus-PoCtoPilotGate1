@@ -120,24 +120,21 @@ Gợi ý: mở `data/world.json` phần `policies`, `orders[].parcels`, `ops_lim
 
 | Mục | Điền cho trợ lý hoàn tiền |
 |---|---|
-| Người dùng | |
-| Việc người dùng cần làm xong | |
-| Đầu ra của hệ thống (kể cả các lệnh ghi) | |
-| Dữ liệu trợ lý đọc lúc chạy (bảng nào trong `data/world.json`) | |
-| Trường then chốt quyết định tiền và lỗi hãng | |
-| Với mỗi trường then chốt: **nguồn sự thật** hay **bản sao** (ai cập nhật, khi nào)? | |
-| Định dạng cần để ý (ngày, trường được phép trống, đơn nhiều kiện) | |
-| Thế giới thật làm dữ liệu lệch ở đâu (theo mùa, đổi chính sách, giờ cao điểm, người nhập tay)? | |
-| Câu người ngoài sẽ hỏi về nguồn dữ liệu ("sao hệ thống biết đơn trễ mấy ngày?") | |
+| Người dùng | Khách gửi yêu cầu hoàn phí do giao trễ và nhân viên CSKH duyệt ca cần can thiệp. Shop, hãng vận chuyển và kế toán dùng kết quả để đối soát. |
+| Việc người dùng cần làm xong | Khách biết yêu cầu của đúng đơn đã được hoàn bao nhiêu, chưa đủ điều kiện hay đang chờ duyệt. Nhân viên có căn cứ để duyệt đúng khoản tiền và đúng đơn. |
+| Đầu ra của hệ thống (kể cả các lệnh ghi) | Quyết định hoàn, từ chối hoặc chuyển duyệt. Khi được phép, `issue_refund` ghi khoản hoàn, `file_carrier_fault` ghi lỗi đúng hãng và kiện, `notify_carrier` thông báo cho hãng, `send_reply` phản hồi khách theo kết quả thực tế. |
+| Dữ liệu trợ lý đọc lúc chạy (bảng nào trong `data/world.json`) | `orders` và `orders[].parcels` cho đơn và tracking, `policies` cho quy tắc, `approvals` cho quyền duyệt, sổ giao dịch khởi tạo từ `ledger_seed` cho lịch sử hoàn. `ops_limits` và `ops_facts` cung cấp trần, chi phí và công suất cho cổng và báo cáo vận hành. |
+| Trường then chốt quyết định tiền và lỗi hãng | `shipping_fee_vnd`, `goods_value_vnd`, `promised_date`, `delivered_date`, `delay_cause`, `parcel_id`, `carrier_id`. Chính sách dùng `effective_from`, `effective_to`, `late`, `fault_causes` và `auto_limit_vnd`. Phiếu duyệt có `ticket_id`, `order_id`, `customer_id`, `max_vnd`, `expires_at` và `status`. |
+| Với mỗi trường then chốt: **nguồn sự thật** hay **bản sao** (ai cập nhật, khi nào)? | Hệ thống đơn hàng ghi phí và giá trị lúc đặt đơn, cùng ngày hẹn cho từng kiện. Tracking do hãng cập nhật khi giao hoặc ghi nhận sự cố là nguồn cho ngày giao, mã kiện, hãng và nguyên nhân trễ. Sổ chính sách do LogiX cập nhật theo ngày hiệu lực là nguồn cho quyền lợi và hạn mức. `index_active` là cờ tra cứu có thể cập nhật chậm. Người duyệt cập nhật `approvals` khi cấp hoặc thu hồi quyền. Số ngày do khách khai và số ngày model trích xuất là dữ liệu đối chiếu. |
+| Định dạng cần để ý (ngày, trường được phép trống, đơn nhiều kiện) | Ngày theo `YYYY-MM-DD`, tiền là số nguyên VND. `delivered_date` có thể trống, khi đó độ trễ tính đến `as_of` và cần kiểm trạng thái kiện. `effective_to` trống nghĩa là chưa có ngày hết hiệu lực. `delay_cause` trống thì chưa đủ căn cứ ghi lỗi hãng. Đơn nhiều kiện phải đối chiếu `parcel_id` với `carrier_id` của chính kiện đó. |
+| Thế giới thật làm dữ liệu lệch ở đâu (theo mùa, đổi chính sách, giờ cao điểm, người nhập tay)? | Cao điểm dễ phát sinh quét giao muộn, nhập bù ngày giao hoặc bỏ trống nguyên nhân trễ. Khi chính sách đổi, chỉ mục có thể vẫn trả phiên bản cũ dù phiên bản mới đã hiệu lực. |
+| Câu người ngoài sẽ hỏi về nguồn dữ liệu ("sao hệ thống biết đơn trễ mấy ngày?") | “Hệ thống lấy ngày giao và ngày hẹn từ đâu, và hai ngày đó có thuộc đúng kiện mà tôi đang yêu cầu hoàn phí không?” |
 
 **Tóm lại (điền vào chỗ trống):**
-Trợ lý dùng `__________`, `__________`, `__________` để giúp `__________` làm được `__________`.
-Trường mà nếu sai thì tiền hoặc lỗi hãng sai theo: `__________`, `__________`.
-Chúng tôi biết thế giới thật sẽ làm dữ liệu lệch ở: `__________`. Dấu hiệu nhìn thấy sớm nhất: `__________`.
+Trợ lý dùng tracking của kiện, chính sách có hiệu lực và hồ sơ duyệt để giúp khách và CSKH xác định yêu cầu hoàn phí được xử lý thế nào.
+Sai ngày giao hoặc nguyên nhân trễ có thể làm sai tiền hoàn hoặc ghi lỗi hãng. Khi chính sách đổi, dấu hiệu sớm là mã chính sách trong trace khác phiên bản có hiệu lực theo ngày xử lý.
 
-**Ví dụ drift trong 3 tháng tới** (lấy từ dòng "thế giới thật làm dữ liệu lệch"): cái gì đổi `____` · đổi ngày nào `____` ·
-trường nào cho thấy `____` · con số nào của Bản tiêu chí bị ảnh hưởng `____`.
-Đây là đầu vào đổi hay quan hệ vào–ra đổi? Chỉ số nào sẽ phát hiện? `__________`
+**Ví dụ drift trong 3 tháng tới.** Từ **01/12/2026**, `REFUND-v4` bỏ `FORCE_MAJEURE` khỏi `fault_causes`. Với cùng một kiện giao trễ 4 ngày do bão, v3 có thể hoàn phí và ghi lỗi hãng, còn v4 vẫn hoàn phí nhưng không ghi lỗi hãng. Đây là thay đổi **quan hệ đầu vào–đầu ra**. Căn cứ là `policies[].effective_from` và `policies[].fault_causes`. Nếu chỉ mục vẫn chọn v3, chỉ số ký `wrongful_carrier_faults_max` có thể vượt ngưỡng **0**. Tín hiệu sớm là tỷ lệ trace có `policy_id` lệch phiên bản hiệu lực, tính trên các lần chạy có sự kiện `policy` và đối chiếu theo `as_of`.
 
 **Ví dụ một dòng (đừng chép):** trường then chốt `parcels[].delivered_date` · bản ghi do máy quét ở điểm phát tạo ra, là nguồn
 sự thật về ngày giao · lệch khi điểm phát quét sót hoặc nhập bù bằng tay.
