@@ -1,12 +1,16 @@
 {
-  "team": "",
-  "members": [],
-  "incident": "",
-  "decision_v1": "",
-  "decision_v2": "",
+  "team": "K5-L3B-DAY10-ConBoBietBayPlus-PoCtoPilotGate1",
+  "members": [
+    "BuiDangNhatNguyen-2A202603937",
+    "TranXuanLoc-2A202603951",
+    "DoHoangVu-2A202603920"
+  ],
+  "incident": "S2",
+  "decision_v1": "Tiếp tục",
+  "decision_v2": "Tiếp tục",
   "three_lines": {
-    "environment_assumption": "",
-    "reduce_or_prevent": "",
-    "measure_in_pilot": ""
+    "environment_assumption": "Thiết kế giả định sổ cái cập nhật kịp giữa các lượt xử lý để cổng tính đúng trần 300.000đ/khách/ngày. Giao dịch đồng thời hoặc đồng bộ chậm có thể làm số tiền đã chi bị tính thiếu.",
+    "reduce_or_prevent": "Với mọi yêu cầu giao trễ đi qua write_gate, cổng ngăn ghi trừ tiền shop bằng cách kiểm tra và buộc payer = \"LOGIX\" trước khi ghi. Monitor phát hiện những đề xuất sai để đội đối soát.",
+    "measure_in_pilot": "Trước Gate 2, đo số tiền trừ shop do giao trễ với mục tiêu 0đ, kiểm tổng hoàn tự động theo khách so với trần 300.000đ/ngày khi có giao dịch đồng thời và đo số ca chờ quá 60 phút khi tải tăng."
   }
 }
