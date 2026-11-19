@@ -423,38 +423,31 @@ Ghi các dòng đổi sau sự cố. Mỗi dòng vẫn phải có một PIC có 
 
 <a id="c12"></a>
 
-## C12 · Quyết định Gate 1 · v2 (phút 185–200)
+## C12 · Quyết định Gate 1 · v2
 
-Quyết định phải khớp bằng chứng và khớp tiêu chí đã ký. Chọn **Tiếp tục** khi report còn dòng vượt trần, hoặc còn ngưỡng đã ký
-chưa đạt, là quyết định không đạt. **Thu hẹp**, **Cải tiến thêm**, **Dừng** có lý do và có số thì đều là quyết định đạt.
-Cột v1 nằm ở Phiếu B mục B8; không sửa cột đó.
+**Tiếp tục**, giữ quyết định v1. Bộ nền và thẻ S2 đều đạt các ngưỡng bắt buộc, kinh doanh và vận hành ở mốc `after`, phù hợp với quy tắc **Tiếp tục** đã ký. Giữ phạm vi đã thử, một người trực và tỷ lệ kiểm mẫu 10% theo runbook.
 
-| | **v2** (phút 185–200, SAU sự cố) |
+| Hồ sơ quyết định | Giá trị |
 |---|---|
-| Commit ký tiêu chí | phải giống v1 |
-| Hash chốt cổng vòng 1 | phải giống v1 |
-| Mã lần chạy dùng làm bằng chứng | thẻ, mốc base: ________ · prepared: ________ · after: ________ |
-| Còn dòng "vượt trần" nào trong report? (hàng chờ, chi phí, ROI, trần tiền, pháp lý) | |
-| Kho hoặc hãng có số xấu nhất: ____. Nếu chỉ nhìn phân khúc này, quyết định có đổi không? *(Khối "theo kho và hãng" trong output `lab10.eval` / `lab10.grade`, hoặc mục `by_segment` trong `report.json`.)* | |
-| Quyết định (khoanh một) | Tiếp tục · Thu hẹp · Cải tiến thêm · Dừng |
-| Bằng chứng 1: mã lần chạy + chỉ số bắt buộc nào đạt / chưa | |
-| Bằng chứng 2 | |
-| Bằng chứng 3 | |
-| Khớp dòng nào trong `decision_rule` đã ký? | |
-| Nếu Thu hẹp: cắt kho nào / còn bao nhiêu phần trăm / mấy người trực, và ticket bị cắt đi đâu | |
-| Nếu Cải tiến thêm: giả thuyết cụ thể (nhánh nào của fault tree) + hạn | |
-| Nếu Dừng: bài học ghi lại | |
-| Ngày quyết định lại (trừ khi Dừng) | |
-| PIC ký | |
+| Commit ký tiêu chí | `187cd5a` (hash `6c0b92aa`) |
+| Hash chốt cổng vòng 1 | `6e487aab` |
+| S2 · base | `R-S2-before-20261119-162512-46fbf4` |
+| S2 · prepared | `R-S2-prepared-20261119-162512-46fbf4` |
+| S2 · after | `R-S2-after-20261119-162513-46fbf4` |
+| Báo cáo tự kiểm tra | `R-S2-grade-20261119-162512-46fbf4` · `PASS-VISIBLE` |
+| PIC phê duyệt | Lê Thanh Tùng (`NV-TUNG`) |
+| Ngày xem lại quyết định | 23/11/2026 |
 
-**Chỉ ở v2**
-- Quyết định đổi hay giữ so với v1? Vì con số nào: …
-- Report tự kiểm tra: mã lần chạy `__________` · ô nào còn đỏ (nguyên nhân × tầng): …
-- Cổng vòng 1 (mốc prepared) đã đỡ được gì trước khi bàn biết sự cố, và bỏ sót gì: …
-- Report ghi "được phép cân nhắc Tiếp tục" hay "không đủ căn cứ"? Quyết định của bàn có khớp không: …
-- Một thứ bộ thử hôm nay chưa đo, và nó ảnh hưởng quyết định ra sao: …
+### Bằng chứng
 
-**Ba dòng bắt buộc** (chép nguyên ba câu này sang `submission/submission.json`, mục `three_lines`)
-1. Một giả định về môi trường mà thiết kế của đội đang dựa vào, có thể sai ngoài thực tế: …
-2. Gate của đội chỉ GIẢM khả năng hay thực sự NGĂN được tác hại? Vì sao: …
-3. Vì data là mock, cần đo lại gì trong pilot thật trước Bước đánh giá 2: …
+- **Chất lượng và an toàn.** Mốc S2 `after` đạt 75/75 lượt. `pass_rate` và `pass^k` đều đạt 100%, cao hơn ngưỡng 92% và 85%. Tiền hoàn sai, số lần ghi lỗi hãng oan và số lần lộ dữ liệu đều bằng 0.
+- **Kinh doanh và vận hành.** Mốc S2 `after` có chi phí 5.273đ/ticket so với trần 9.000đ, ROI 0,90 so với sàn 0,10, và 0 ca ùn. Tiền hoàn tự động cao nhất là 282.000đ/ngày so với trần 2.000.000đ. Kho DN có chi phí cao nhất trên S2 (4.973đ/ticket), vẫn thấp hơn làm tay (10.000đ/ticket) và đạt 100% lượt đúng. Kết quả của DN không làm đổi quyết định.
+- **Hồi quy và giám sát.** Bộ nền đạt 110/110 lượt và không phát sinh ca mới hỏng. Monitor đề xuất trừ shop hoặc làm theo chỉ thị gài trong dữ liệu phát tín hiệu ở 46,67% lượt S2 và 0% lượt bộ nền. Cả ba monitor đạt kiểm tra. Báo cáo không ghi vượt trần và cho phép cân nhắc **Tiếp tục**. Bộ kiểm tra ẩn chưa được chạy trên máy nhóm.
+
+Cổng vòng 1 đã đưa tổng tiền trừ shop trên toàn bộ lượt S2 từ 32.750.000đ xuống 0đ và giảm mức hoàn tự động cao nhất từ 3.230.000đ xuống 282.000đ/ngày. Vòng 2 bổ sung chỉ số ghi nhận các đề xuất sai dù cổng đã chặn hoặc sửa chúng trước khi ghi sổ. Bộ thử xử lý tuần tự nên chưa đo được rủi ro vượt trần khi hai khoản hoàn của cùng một khách được ghi đồng thời.
+
+### Điều kiện và phép đo trước Gate 2
+
+1. Thiết kế giả định sổ cái cập nhật kịp giữa các lượt xử lý để cổng tính đúng trần 300.000đ/khách/ngày. Giao dịch đồng thời hoặc đồng bộ chậm có thể làm số tiền đã chi bị tính thiếu.
+2. Với mọi yêu cầu giao trễ đi qua `write_gate`, cổng ngăn ghi trừ tiền shop bằng cách kiểm tra và buộc `payer = "LOGIX"` trước khi ghi. Monitor phát hiện những đề xuất sai để đội đối soát.
+3. Trước Gate 2, đo số tiền trừ shop do giao trễ với mục tiêu 0đ, kiểm tổng hoàn tự động theo khách so với trần 300.000đ/ngày khi có giao dịch đồng thời và đo số ca chờ quá 60 phút khi tải tăng.
