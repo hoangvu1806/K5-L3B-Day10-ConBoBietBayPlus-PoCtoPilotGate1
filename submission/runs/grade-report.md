@@ -1,17 +1,17 @@
-# Tự kiểm tra sự cố S2 · FAIL
+# Tự kiểm tra sự cố S2 · PASS-VISIBLE (chưa chạy test ẩn)
 
 *Đây là kết quả TỰ KIỂM TRA của bàn, không phải điểm. Bài được một team chấm tự động chấm lại sau buổi học.*
 
-- Mã lần chạy: `R-S2-grade-20261119-163344-46fbf4` · bàn: `K5-L3B-DAY10-ConBoBietBayPlus-PoCtoPilotGate1` · grader `lab10-1.0` · 0.556s
-- Ba mốc: base `R-S2-before-20261119-163345-46fbf4` · prepared `R-S2-prepared-20261119-163345-46fbf4` · after `R-S2-after-20261119-163345-46fbf4` (report + trace trong runs/)
+- Mã lần chạy: `R-S2-grade-20261119-165439-8e0d5f` · bàn: `K5-L3B-DAY10-ConBoBietBayPlus-PoCtoPilotGate1` · grader `lab10-1.0` · 0.66s
+- Ba mốc: base `R-S2-before-20261119-165439-8e0d5f` · prepared `R-S2-prepared-20261119-165439-8e0d5f` · after `R-S2-after-20261119-165439-8e0d5f` (report + trace trong runs/)
 - Mốc prepared (cổng vòng 1): đã chốt `6e487aab`, còn nguyên
-- Hash code đội (guards + monitors + switches + cổng vận hành): `46fbf4905181`
+- Hash code đội (guards + monitors + switches + cổng vận hành): `8e0d5ff65b58`
 - Hash Bản tiêu chí chấp nhận: `6c0b92aab4cc` · đã ký: `6c0b92aab4cc` · KHÔNG ĐỔI
 - Thẻ đang kiểm: `S2` · dòng "Thẻ đã bốc" bàn ghi trong phiếu: S2 · khớp
 
 | Kiểm | Kết quả | Chi tiết |
 |---|---|---|
-| 1 integrity | ❌ | file khoá bị đổi: ['data/tickets.jsonl', 'data/world.json', 'incidents/S2/card.json', 'incidents/S2/card.md', 'incidents/S2/tickets.jsonl', 'incidents/S2/world_patch.json', 'lab10/__init__.py', 'lab10/_gradectx.py', 'lab10/_noop_guards.py', 'lab10/agent.py', 'lab10/check_submission.py', 'lab10/checkpoint.py', 'lab10/criteria.py', 'lab10/eval.py', 'lab10/gate.py', 'lab10/grade.py', 'lab10/helpers.py', 'lab10/mock_llm.py', 'lab10/ops.py', 'lab10/tools.py', 'lab10/trace.py', 'lab10/world.py', 'tests/test_public.py'] |
+| 1 integrity | ✅ | file khoá bị đổi: không |
 | 2 criteria | ✅ | đã ký, còn nguyên |
 | 3 visible | ✅ | base có vấn đề: True; after sạch: True; ticket còn hỏng: không; trần còn vượt: không |
 | 4 hidden | — | máy này không có bài kiểm tra ẩn (team chấm sẽ chạy sau buổi học) |
