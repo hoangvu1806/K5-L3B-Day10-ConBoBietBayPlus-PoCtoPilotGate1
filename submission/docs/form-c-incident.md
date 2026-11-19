@@ -431,10 +431,10 @@ Ghi các dòng đổi sau sự cố. Mỗi dòng vẫn phải có một PIC có 
 |---|---|
 | Commit ký tiêu chí | `187cd5a` (hash `6c0b92aa`) |
 | Hash chốt cổng vòng 1 | `6e487aab` |
-| S2 · base | `R-S2-before-20261119-162512-46fbf4` |
-| S2 · prepared | `R-S2-prepared-20261119-162512-46fbf4` |
-| S2 · after | `R-S2-after-20261119-162513-46fbf4` |
-| Báo cáo tự kiểm tra | `R-S2-grade-20261119-162512-46fbf4` · `PASS-VISIBLE` |
+| S2 · base | `R-S2-before-20261119-165439-8e0d5f` |
+| S2 · prepared | `R-S2-prepared-20261119-165439-8e0d5f` |
+| S2 · after | `R-S2-after-20261119-165439-8e0d5f` |
+| Báo cáo tự kiểm tra | `R-S2-grade-20261119-165439-8e0d5f` · `PASS-VISIBLE` |
 | PIC phê duyệt | Lê Thanh Tùng (`NV-TUNG`) |
 | Ngày xem lại quyết định | 23/11/2026 |
 

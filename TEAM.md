@@ -86,17 +86,21 @@ Mỗi thành viên tự viết một mục bên dưới (chép mẫu, đổi ti�
 
 ### Phần việc phụ trách
 
-- Vai: **Sản phẩm và kinh doanh**.
-- Câu 1.1, 1.6 (Phiếu A · mục A1, A4, A5) và `config/acceptance_criteria.json`; Câu 2.3 (Bản đồ dữ liệu & drift B3), Câu 2.5 (Pre-mortem lăng kính kinh doanh B6), Câu 2.9 (cổng `business` trong `config/operating_gates.json`, B7.4), Quyết định v1 (B8); Câu 3.2 (Specification C5), Câu 3.5 chỉnh `business` trong `config/operating_gates.json` (C7), Quyết định v2 & 3 dòng bắt buộc (C12).
+- **Sản phẩm và kinh doanh.** Chủ trì mục tiêu hệ thống và tiêu chí nghiệm thu (A1 câu 1.1, A4), bản đồ dữ liệu và phân tích drift (B3), phần kinh doanh của pre-mortem (B6) và cổng kinh doanh (B7.4). Đối chiếu số liệu cho v1 (B8) và viết quyết định v2 (C12), cùng quy tắc đối soát (C5 câu 3.2) và đánh giá cổng kinh doanh sau sự cố S2 (C7).
 
 ### Đóng góp cụ thể
 
-...
+- Nối mục tiêu rút ngắn thời gian xử lý hoàn phí với PRD v1.1 và eval card Lab 9. Soạn ngưỡng trước khi nhóm chạy đánh giá, gồm 92% lượt đúng, 85% ticket đúng cả năm lượt, ba ngưỡng an toàn bằng 0, chi phí tối đa 9.000đ/ticket, ROI tối thiểu 0,10 và 0 ca ùn. Viết điều kiện dừng và quy tắc cho bốn quyết định trong `config/acceptance_criteria.json`.
+- Lập bản đồ nguồn dữ liệu và phân tích thay đổi chính sách `REFUND-v4` trong B3. Đặt trần hoàn tự động 2.000.000đ/ngày, ngân sách tiền máy 1.500đ/ticket và sàn ROI 0,10 trong `config/operating_gates.json`. Giữ đủ phạm vi bộ thử để so chi phí theo kho và dùng mốc `prepared` để đối chiếu các ngưỡng cho v1.
+- Viết yêu cầu mọi khoản hoàn phí giao trễ phải do LogiX chịu, rồi kiểm chứng bằng sổ cái và `merchant_debit_vnd`. Ở C7 và C12, dùng kết quả S2 để giải thích việc giữ các cổng kinh doanh và quyết định **Tiếp tục**. Mốc `after` đạt 75/75 lượt, 0đ trừ shop, 5.273đ/ticket, ROI 0,90 và 0 ca ùn.
+- Dùng trợ lý AI để đọc repo, đối chiếu phiếu với cấu hình và báo cáo, hỗ trợ soạn và rà câu chữ ở các mục phụ trách.
 
 ### Bằng chứng
 
-Mã commit, mã lần chạy (`runs/<mã>`), dòng trong phiếu.
+- `15a782a`, `fd4a348` (Phiếu A và bộ tiêu chí), `3b11a47` (B3), `552b3c5` (B6, B7.4 và cấu hình kinh doanh), `90bd53f` (C5 câu 3.2 và C7), `4be5ca4` (C12).
+- `R-base-after-20261119-154319-e820f4` (kiểm cổng kinh doanh B7.4) và `R-S2-grade-20261119-165439-8e0d5f` (bằng chứng cho quyết định v2 trong C12).
 
 ### Exit ticket
 
-Một điều học được, một điều còn chưa chắc.
+- **Điều học được.** Chi phí pilot phải tính cả tiền máy, công duyệt và phí trực. Kết quả đúng vẫn cần đối chiếu với trải nghiệm của khách và chi phí từng kho trước khi mở rộng.
+- **Điều còn chưa chắc.** Nếu nhiều khoản hoàn của cùng một khách đến đồng thời, sổ cái có cập nhật kịp để giữ trần 300.000đ/khách/ngày và hàng chờ vẫn trong SLA 60 phút hay không.
