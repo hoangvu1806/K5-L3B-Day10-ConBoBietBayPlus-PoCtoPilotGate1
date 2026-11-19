@@ -7,18 +7,28 @@
     "roi_min": null
   },
   "operations": {
-    "pic": "",
-    "approver_id": "",
+    "pic": "NV-TUNG",
+    "approver_id": "NV-HANH",
     "reviewers_on_shift": 1,
-    "review_capacity_per_hour": null,
-    "max_queue_wait_minutes": null,
-    "stop_conditions": [],
-    "alert_channel": "",
-    "decision_note": false,
-    "review_sampling_pct": 0
+    "review_capacity_per_hour": 6,
+    "max_queue_wait_minutes": 60,
+    "stop_conditions": [
+      "Nếu phát hiện hoàn tiền sai (> 0đ) thì tắt ngay issue_refund trong config/switches.json và chuyển người duyệt",
+      "Nếu có lệnh ghi lỗi oan cho hãng hoặc lộ PII sang bên thứ ba thì tắt ngay file_carrier_fault / notify_carrier",
+      "Nếu có ca chờ duyệt quá 60 phút (queue_stuck > 0) thì gọi thêm 1 người trực hoặc thu hẹp pilot_scope"
+    ],
+    "alert_channel": "#logix-refund-pilot-alerts",
+    "decision_note": true,
+    "review_sampling_pct": 10
   },
   "legal": {
-    "pii_fields_blocked_to_third_party": [],
-    "carrier_fault_requires_recorded_cause": false
+    "pii_fields_blocked_to_third_party": [
+      "recipient_contact",
+      "customer_note",
+      "name",
+      "phone",
+      "street"
+    ],
+    "carrier_fault_requires_recorded_cause": true
   }
 }
